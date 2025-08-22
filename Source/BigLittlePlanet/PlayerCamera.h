@@ -33,10 +33,6 @@ private:
 
 	float rightAngleAxis;
 
-	FVector upVector = FVector(0, 0, 1);
-
-	FVector rightVector;
-
 	UPROPERTY(EditAnywhere)
 	float multiplier = 50;
 
