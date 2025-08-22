@@ -25,15 +25,8 @@ void APlayerCamera::MoveCamera(float DeltaTime)
 	float mouseY;
 	UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetMousePosition(mouseX, mouseY);
 
-	rightVector = GetActorRightVector();
-
 	upAngleAxis += DeltaTime * multiplier * (mouseX - lastFrameMousePos.X);
 	rightAngleAxis += DeltaTime * multiplier * (lastFrameMousePos.Y - mouseY);
-
-	if (upAngleAxis >= 360)
-	{
-		upAngleAxis = 0;
-	}
 
 	FRotator newRotation = FRotator(rightAngleAxis, upAngleAxis, 0);
 
