@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "Isocahedron.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "DrawDebugHelpers.h"
-#include "Isocahedron.h"
 
 // Sets default values
 AIsocahedron::AIsocahedron()
@@ -10,6 +10,8 @@ AIsocahedron::AIsocahedron()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	SceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("SceneComponent"));
+	RootComponent = SceneComponent;
 }
 
 
@@ -20,7 +22,21 @@ void AIsocahedron::BeginPlay()
 	SubdivideIcosahedron(vertexPositions, icoshedronFaces);
 	SubdivideIcosahedron(vertexPositions, icoshedronFaces);
 	SubdivideIcosahedron(vertexPositions, icoshedronFaces);
-	
+	SubdivideIcosahedron(vertexPositions, icoshedronFaces);	
+
+
+	for (auto vertex : vertexPositions)
+	{
+		_dynamMeshData.AppendVertex(vertex);
+	}
+
+	for (auto triangle : icoshedronFaces)
+	{
+		_dynamMeshData.AppendTriangle(triangle[0], triangle[1], triangle[2], 0);
+	}
+
+	Mesh->SetMesh(_dynamMeshData);
+
 }
 
 // Called every frame
@@ -39,7 +55,6 @@ void AIsocahedron::Tick(float DeltaTime)
 		DrawDebugLine(GetWorld(), Point2, Point0, FColor(255, 255, 255));
 
 	}
-
 }
 
 FVector AIsocahedron::GetMiddle(FVector& vectorA, FVector& vectorB)

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "UDynamicMesh.h"
+#include "DynamicMesh/DynamicMesh3.h"
 #include "GameFramework/Actor.h"
 #include "Isocahedron.generated.h"
 
@@ -60,8 +61,15 @@ private:
 		{8, 6, 7},
 		{9, 8, 1}
 	};
+
+	FDynamicMesh3 _dynamMeshData = FDynamicMesh3();
+
 public:
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	USceneComponent* SceneComponent;
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UDynamicMesh* Mesh;
 
 public:	
