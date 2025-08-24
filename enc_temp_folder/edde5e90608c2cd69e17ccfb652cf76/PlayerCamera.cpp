@@ -28,11 +28,11 @@ void APlayerCamera::MoveCamera(float DeltaTime)
 	upAngleAxis += DeltaTime * multiplier * (mouseX - lastFrameMousePos.X);
 	rightAngleAxis += DeltaTime * multiplier * (lastFrameMousePos.Y - mouseY);
 
-	if (rightAngleAxis > 60)
+	if (rightAngleAxis < 60)
 	{
 		rightAngleAxis = 60;
 	}
-	else if (rightAngleAxis < -60)
+	else if (rightAngleAxis > -60)
 	{
 		rightAngleAxis = -60;
 	}
