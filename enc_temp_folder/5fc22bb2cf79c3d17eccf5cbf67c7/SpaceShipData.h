@@ -35,7 +35,7 @@ public:
 	int ItemCapacity;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	int LightyearsPerDay;
+	int KilometersPerSecond;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	int ArmorStat;
