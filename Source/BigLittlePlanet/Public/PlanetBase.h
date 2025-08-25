@@ -13,7 +13,7 @@ class BIGLITTLEPLANET_API APlanetBase : public AActor
 	
 public:	
 	// Sets default values for this actor's properties
-	APlanetBase();
+	
 
 protected:
 	// Called when the game starts or when spawned
@@ -23,19 +23,5 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int distanceToUsLightyears;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int ironOnPlanet;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int woodOnPlanet;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMin = "0", ClampMax = "100", UIMin = "0", UIMax = "100"))
-	int dangerRating;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMin = "0", ClampMax = "100", UIMin = "0", UIMax = "100"))
-	int richesRating;
 
 };
