@@ -4,8 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "Subsystems/WorldSubsystem.h"
-#include "PlanetData.h"
-#include "SpaceShipData.h"
 #include "HomeplanetManager.generated.h"
 
 /**
@@ -43,14 +41,5 @@ public:
 
 	UPROPERTY(BlueprintReadWrite)
 	int totalWood = 5;
-
-	TArray<PlanetData*> FoundPlanets;
-
-public:
-
-	void AddFoundPlanet();
-
-	UFUNCTION(BlueprintCallable)
-	void EmbarkExpidition(USpaceShipData* spaceShip, int crewmates, int planetIndex);
 
 };
