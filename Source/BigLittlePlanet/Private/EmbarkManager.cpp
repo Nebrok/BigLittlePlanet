@@ -23,8 +23,17 @@ void AEmbarkManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (embarking)
+	if (embarkState == EmbarkState::Embarking)
 	{
+		if (CurrentExpedition->distanceToTarget > 0)
+		{
+			CurrentExpedition->distanceToTarget -= CurrentExpedition->CurrentSpaceShip->LightyearsPerDay * DeltaTime / 10;
+		}
+		else
+		{
+			CurrentExpedition->distanceToTarget = 0;
+			embarkState = EmbarkState::Arrived;
+		}
 
 	}
 
@@ -38,19 +47,35 @@ void AEmbarkManager::AddFoundPlanet()
 	FoundPlanets.Add(newPlanet);
 }
 
+float AEmbarkManager::GetDistanceToTargetPlanet()
+{
+	if (!embarkState == EmbarkState::Embarking)
+	{
+		return 0.0f;
+	}
+
+	return CurrentExpedition->distanceToTarget;
+}
+
+FString AEmbarkManager::GetExpeditionStateString()
+{
+	return UEnum::GetValueAsString(embarkState);
+}
+
 
 void AEmbarkManager::EmbarkExpidition(USpaceShipData* spaceShip, int crewmates, int planetIndex)
 {
-	if (embarking)
+	if (embarkState != EmbarkState::Idle)
 	{
 		return;
 	}
 
 	AddFoundPlanet();
 
+	delete(CurrentExpedition);
 	CurrentExpedition = new Expedition(FoundPlanets[planetIndex], spaceShip, crewmates);
 
-	embarking = true;
+	embarkState = EmbarkState::Embarking;
 
 	UE_LOG(LogTemp, Display, TEXT("Embarking"));
 

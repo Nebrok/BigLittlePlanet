@@ -8,6 +8,17 @@
 #include "SpaceShipData.h"
 #include "EmbarkManager.generated.h"
 
+class Expedition;
+
+UENUM(BlueprintType)
+enum EmbarkState
+{
+	Idle,
+	Embarking,
+	Arrived,
+	Returning
+};
+
 UCLASS()
 class BIGLITTLEPLANET_API AEmbarkManager : public AActor
 {
@@ -30,15 +41,24 @@ public:
 
 	void AddFoundPlanet();
 
+	UFUNCTION(BlueprintCallable)
+	float GetDistanceToTargetPlanet();
+
+	UFUNCTION(BlueprintCallable)
+	FString GetExpeditionStateString();
+
 	TArray<PlanetData*> FoundPlanets;
 
 	Expedition* CurrentExpedition;
 
-	bool embarking;
+	EmbarkState embarkState;
 };
 
-struct Expedition
+class BIGLITTLEPLANET_API Expedition
 {
+
+public:
+
 	Expedition(PlanetData* expPlanet, USpaceShipData* expSpaceship, int crewMates)
 	{
 		CurrentTargetPlanet = expPlanet;
@@ -46,12 +66,15 @@ struct Expedition
 		distanceToTarget = expPlanet->distanceToUsLightyears;
 		CurrentCrewMates = crewMates;
 	}
-	
+
 	PlanetData* CurrentTargetPlanet;
 
+	UPROPERTY()
 	USpaceShipData* CurrentSpaceShip;
 
+	UPROPERTY()
 	int CurrentCrewMates;
 
+	UPROPERTY()
 	float distanceToTarget;
 };
