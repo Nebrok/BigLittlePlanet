@@ -16,6 +16,15 @@ public:
 	// Sets default values for this actor's properties
 	AHexGridGenerator();
 
+private:
+
+	UPROPERTY(EditAnywhere)
+	int hexHeight = 90;
+
+	UPROPERTY(EditAnywhere)
+	int hexWidth = 100;
+
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

@@ -16,22 +16,30 @@ void AHexGridGenerator::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	GenerateTiles();
 }
 
 // Called every frame
 void AHexGridGenerator::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 void AHexGridGenerator::GenerateTiles()
 {
 	for (int i = 0; i < rangeToSpawn; i++) 
 	{
-		//We need a better way to do this
-		//FActorSpawnParameters spawnInfo;
-		//GetWorld()->SpawnActor<AHexTile>(FVector(i * 100, 0, 0), FRotator(0, 0, 0), spawnInfo);
+		for (int j = 0; j < rangeToSpawn; j++)
+		{
+			nodes.Add(new HexNode);
+
+			int randomTileIndex = rand() % allTiles.Num();
+
+			FActorSpawnParameters spawnInfo;
+			GetWorld()->SpawnActor<AHexTile>(allTiles[randomTileIndex], FVector(i * hexHeight + (j % 2) * hexHeight / 2, 
+																				j * hexWidth, 
+																				0), FRotator(0, 0, 0), spawnInfo);
+		}
 	}
 }
 
