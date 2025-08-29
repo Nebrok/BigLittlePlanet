@@ -8,11 +8,11 @@
 #include "HexTile.generated.h"
 
 UENUM(BlueprintType)
-enum TileEdge
+enum class ETileEdge : uint8
 {
-	Empty,
-	Road,
-	Water
+	Empty UMETA(DisplayName = "Empty"),
+	Road UMETA(DisplayName = "Road"),
+	Water UMETA(DisplayName = "Water")
 };
 
 UCLASS()
@@ -32,8 +32,11 @@ public:
 
 	virtual void Tick(float DeltaTime) override;
 
-	UStaticMesh* Mesh;
-	HexNode* node;
-	TArray<TileEdge> tileEdges[6];
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<ETileEdge> tileEdges;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UStaticMesh* Mesh;
+
+	HexNode* node;
 };

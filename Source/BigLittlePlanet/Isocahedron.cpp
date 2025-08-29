@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "Isocahedron.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "DrawDebugHelpers.h"
-#include "Isocahedron.h"
 
 // Sets default values
 AIsocahedron::AIsocahedron()

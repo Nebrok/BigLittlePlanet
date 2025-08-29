@@ -2,8 +2,9 @@
 
 #pragma once
 
-#include "HexTile.h"
 #include "CoreMinimal.h"
+
+class AHexTile;
 
 /**
  * 
@@ -14,10 +15,12 @@ public:
 	HexNode();
 	~HexNode();
 
-	TArray<HexNode*> adjacentNodes[6];
+	TArray<HexNode*> adjacentNodes;
 
 	AHexTile* selectedTile;
+
 	int rotationsClockwise = 0;
+	
 	TArray<AHexTile*> availableTileOptions;
 
 };
