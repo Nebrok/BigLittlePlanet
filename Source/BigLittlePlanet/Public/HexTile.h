@@ -32,11 +32,12 @@ public:
 
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TArray<ETileEdge> tileEdges;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UStaticMesh* Mesh;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<ETileEdge> tileEdges;
+	
 	HexNode* node;
 };
